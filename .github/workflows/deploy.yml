@@ -27,4 +27,4 @@ jobs:
       - name: Deploy to GitHub Pages
         run: bun run deploy
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.MY_GITHUB_TOKEN }}
