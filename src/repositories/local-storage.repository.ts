@@ -5,12 +5,20 @@ export class LocalStorageRepository<T extends { id: string }> {
         this.storageKey = storageKey;
     }
 
+    private hasEmptyFields(dto: Partial<T>): boolean {
+        return Object.values(dto).some(value => value === undefined || value === null || value === "");
+    }
+
     find(): T[] {
         const items = localStorage.getItem(this.storageKey);
         return items ? JSON.parse(items) : [];
     }
 
     save(dto: Partial<T>): { success: boolean; message: string } {
+        if (this.hasEmptyFields(dto)) {
+            return { success: false, message: 'Todos os campos são obrigatórios e não podem estar vazios.' };
+        }
+
         const items = this.find();
         const newItem: T = { ...dto, id: Date.now().toString() } as T;
         items.push(newItem);
@@ -21,6 +29,10 @@ export class LocalStorageRepository<T extends { id: string }> {
     update(id: string, updateDto: Partial<T>): { success: boolean; message: string } {
         const items = this.find();
         const itemIndex = items.findIndex((item) => item.id === id);
+
+        if (this.hasEmptyFields(updateDto)) {
+            return { success: false, message: 'Todos os campos são obrigatórios e não podem estar vazios.' };
+        }
 
         if (itemIndex !== -1) {
             const updatedItem = { ...items[itemIndex], ...updateDto };
