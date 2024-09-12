@@ -1,43 +1,20 @@
 <template>
-<div class="navbar">
-    <Menubar :model="items" />
-    <ToggleButton v-model="darkMode" class="light-mode" onLabel="Dark" offLabel="Light" @click="toggleDarkMode" />
-  </div>
-
-  <input type="file" accept=".json" ref="fileInput" style="display: none" @change="handleFileSelect" />
-
-  <div class="card flex justify-center">
-    <Dialog v-model:visible="visibleAddTag" modal header="Cadastrar tag" class="modal-header"
-      :style="{ width: '25rem'}">
-      <template #header>
-        <div class="inline-flex items-center justify-center gap-2" id="modal-header">
-          Cadastrar tag
-        </div>
+  <div class="navbar">
+    <Menubar :model="items">
+      <template #end>
+        <ToggleButton v-model="darkMode" class="light-mode" onLabel="Dark" offLabel="Light" @click="toggleDarkMode" />
       </template>
-      <div class="flex items-center gap-4 mb-8">
-        <label for="tag" id="modalType" class="font-semibold w-24">Tag</label>
-        <InputText id="tag" class="flex-auto" autocomplete="off" />
-      </div>
-      <div class="flex justify-end gap-2" id="modal-buttons">
-        <Button type="button" id="btn-cadastro" label="Cancelar" severity="secondary"
-          @click="visibleAddTag = false"></Button>
-        <Button type="button" id="btn-cadastro" label="Salvar" @click="visibleAddTag = false"></Button>
-      </div>
-    </Dialog>
+    </Menubar>
+    <input type="file" accept=".json" ref="fileInput" style="display: none" @change="handleFileSelect" />
   </div>
 </template>
 
 <script setup lang="ts">
 import { ref, onMounted, watch } from 'vue';
-import Dialog from 'primevue/dialog';
-import Button from 'primevue/button';
 import Menubar from 'primevue/menubar';
-import InputText from 'primevue/inputtext'
-import ToggleButton from 'primevue/togglebutton'
-import { exportDatabase } from '../services/database-export.service'
+import ToggleButton from 'primevue/togglebutton';
+import { exportDatabase } from '../services/database-export.service';
 import { importDatabase } from '../services/database-import.service';
-
-const visibleAddTag = ref(false);
 
 const darkMode = ref(false);
 
@@ -68,9 +45,6 @@ const toggleDarkMode = () => {
 const items = ref([
   {
     label: 'Cadastrar tags',
-    command: () => {
-      visibleAddTag.value = true;
-    },
   },
   {
     label: 'Cadastrar recomendações',
@@ -82,14 +56,14 @@ const items = ref([
     label: 'Exportar JSON',
     command: () => {
       exportDatabase();
-    }
+    },
   },
   {
     label: 'Importar JSON',
     command: () => {
       fileInput.value?.click();
-    }
-  }
+    },
+  },
 ]);
 
 onMounted(() => {
@@ -102,7 +76,6 @@ watch(darkMode, (newValue) => {
   localStorage.setItem('darkMode', newValue.toString());
   toggleDarkMode();
 });
-
 </script>
 
 <style scoped>
@@ -130,5 +103,11 @@ watch(darkMode, (newValue) => {
   font-weight: 500;
   font-style: normal;
   margin-right: 1rem;
+}
+
+.menubar-end {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
 }
 </style>
