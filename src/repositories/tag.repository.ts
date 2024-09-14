@@ -8,7 +8,7 @@ export function saveTag(tag: Tags) {
     const nameExists = items.some(existingTag => existingTag.name.toLowerCase() === tag.name.toLowerCase());
 
     if (nameExists) {
-        return { success: false, message: 'Já existe um Tag com esse nome.' };
+        return { success: false, message: 'Já existe uma Tag com esse nome.' };
     }
 
     return tagRepo.save(tag);
