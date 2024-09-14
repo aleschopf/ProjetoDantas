@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "bun run vite build",
-    "deploy": "vite build && gh-pages -d dist",
+    "deploy": "vite build && gh-pages -d dist -r https://x-access-token:${GITHUB_TOKEN}@github.com/aleschopf/ProjetoDantas.git",
     "preview": "vite preview",
     "build-only": "vite build",
     "type-check": "vue-tsc --build --force"
