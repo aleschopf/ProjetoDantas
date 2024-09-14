@@ -32,8 +32,8 @@ jobs:
 
       - name: Deploy to GitHub Pages
         run: |
-          git config --global user.name "GitHub Actions"
-          git config --global user.email "actions@github.com"
+          git config --global user.name "${{ secrets.NAME }}"
+          git config --global user.email "${{ secrets.EMAIL }}"
           bun run gh-pages -d dist
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
