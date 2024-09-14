@@ -29,7 +29,6 @@ const handleFileSelect = async (event: Event) => {
     try {
       const fileContent = await file.text();
       const result = await importDatabase(fileContent);
-      console.log(result.message);
     } catch (error) {
       console.error('Error reading file:', error);
     }
