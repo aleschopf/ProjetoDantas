@@ -101,7 +101,7 @@ const deleteTag = (tag: Tags) => {
     accept: () => {
       const result = tagRepo.delete(tag.id);
       if (result.success) {
-        toast.add({ severity: 'info', summary: 'Confirmado', detail: 'Tag apagada', life: 3000 });
+        toast.add({ severity: 'warn', summary: 'Confirmado', detail: 'Tag apagada', life: 3000 });
         tags.value = tags.value.filter(t => t.id !== tag.id);
       } else {
         console.error(result.message);

@@ -101,7 +101,7 @@ const deleteTargetAudience = (targetAudience: TargetAudience) => {
     accept: () => {
       const result = targetAudienceRepo.delete(targetAudience.id);
       if (result.success) {
-        toast.add({ severity: 'info', summary: 'Confirmado', detail: 'Público Alvo apagado', life: 3000 });
+        toast.add({ severity: 'warn', summary: 'Confirmado', detail: 'Público Alvo apagado', life: 3000 });
         targetAudiences.value = targetAudiences.value.filter(t => t.id !== targetAudience.id);
       } else {
         console.error(result.message);
