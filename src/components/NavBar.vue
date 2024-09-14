@@ -11,13 +11,14 @@
 
 
 <script setup lang="ts">
-import { ref, onMounted, watch } from 'vue';
+import { ref, onMounted, provide, watch } from 'vue';
 import Menubar from 'primevue/menubar';
 import ToggleButton from 'primevue/togglebutton';
 import { exportDatabase } from '../services/database-export.service';
 import { importDatabase } from '../services/database-import.service';
 
 const darkMode = ref(false);
+provide('darkMode', darkMode);
 
 const fileInput = ref<HTMLInputElement | null>(null);
 

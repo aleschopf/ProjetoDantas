@@ -10,8 +10,16 @@
 .table-view {
   width: 90%;
   margin: 0 auto;
-  border: 2px solid #27272a;
   border-radius: 8px;
+  transition: border-color 0.3s ease;
+}
+
+.table-view-light {
+  border: 2px solid #e6e6e6;
+}
+
+.table-view-dark {
+  border: 2px solid #27272a;
 }
 
 .color-box {
