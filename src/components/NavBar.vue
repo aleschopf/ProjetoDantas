@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full flex items-center justify-center mb-10" >
+  <div class="w-full flex items-center justify-center mb-10">
     <Menubar :model="items" class="w-[98%] rounded-lg shadow-md overflow-hidden">
       <template #end>
         <ToggleButton v-model="darkMode" class="ml-4" onLabel="Dark" offLabel="Light" @click="toggleDarkMode" />
@@ -7,12 +7,14 @@
     </Menubar>
   </div>
   <input type="file" accept=".json" ref="fileInput" class="hidden" @change="handleFileSelect" />
+  <ConfirmDialog />
 </template>
 
 
 <script setup lang="ts">
 import { ref, onMounted, provide, watch } from 'vue';
 import Menubar from 'primevue/menubar';
+import ConfirmDialog from 'primevue/confirmdialog';
 import ToggleButton from 'primevue/togglebutton';
 import { exportDatabase } from '../services/database-export.service';
 import { importDatabase } from '../services/database-import.service';

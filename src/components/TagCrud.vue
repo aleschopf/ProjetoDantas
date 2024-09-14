@@ -17,11 +17,10 @@ import Column from 'primevue/column';
 import Toolbar from 'primevue/toolbar';
 import Tag from 'primevue/tag';
 import Toast from 'primevue/toast';
-import ConfirmDialog from 'primevue/confirmdialog';
 import Dialog from 'primevue/dialog';
 
 const darkMode = ref(document.documentElement.classList.contains('dark'));
-const tagRepo = new LocalStorageRepository<Tags>('tags');
+const tagRepo = new LocalStorageRepository<Tags>(Tags.table);
 const tags = ref<Tags[]>([]);
 const selectedTags = ref<Tags[]>([]);
 const editingTag = ref<Tags | null>(null);
@@ -198,6 +197,8 @@ onMounted(() => {
   initFilters();
   tags.value = tagRepo.find();
 
+  updateDarkMode()
+
   observer = new MutationObserver(() => {
     updateDarkMode();
   });
@@ -217,7 +218,6 @@ onUnmounted(() => {
 
 <template>
   <Toast />
-  <ConfirmDialog />
 
   <Dialog v-model:visible="visibleTagEdit" header="Editar tag" :modal="true" class="p-fluid">
     <div class="p-4 font-roboto">
@@ -284,11 +284,11 @@ onUnmounted(() => {
   <div :class="['table-view', darkMode ? 'table-view-dark' : 'table-view-light']">
     <Toolbar class="mb-6">
       <template #start>
-        <h4 class="mr-full">Gerenciar tags</h4>
+        <h4 class="mr-full">Gerenciar Tags</h4>
       </template>
       <template #end>
         <Button label="Adicionar" icon="pi pi-plus" severity="success" class="mr-2" @click="abrirDrawer" />
-        <Button label="Apagar Selecionadas" icon="pi pi-trash" severity="danger" class="mr-2"
+        <Button label="Apagar selecionadas" icon="pi pi-trash" severity="danger" class="mr-2"
           @click="deleteSelectedTags" :disabled="!selectedTags.length" />
       </template>
     </Toolbar>
