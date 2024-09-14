@@ -1,4 +1,4 @@
-import { Tag } from '../entities/tag.entity';
+import { Tags } from '../entities/tag.entity';
 import { TargetAudience } from '../entities/target-audience.entity';
 import { Video } from '../entities/video.entity';
 import { Exercise } from '../entities/exercise.entity';
@@ -8,7 +8,7 @@ export async function importDatabase(fileContent: string): Promise<{ success: bo
         const data = JSON.parse(fileContent);
 
         if (data.tags) {
-            localStorage.setItem(Tag.table, JSON.stringify(data.tags));
+            localStorage.setItem(Tags.table, JSON.stringify(data.tags));
         }
 
         if (data.targetAudiences) {

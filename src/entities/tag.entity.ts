@@ -1,6 +1,6 @@
 import type { ITag } from '../interfaces/tag.interface'; // Importando a interface
 
-export class Tag implements ITag {
+export class Tags implements ITag {
     public id: string;
     constructor(
         public name: string,

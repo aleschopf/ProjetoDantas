@@ -1,11 +1,11 @@
 import { LocalStorageRepository } from './local-storage.repository';
-import { Tag } from '../entities/tag.entity';
+import { Tags } from '../entities/tag.entity';
 
-export const tagRepo = new LocalStorageRepository<Tag>(Tag.table);
+export const tagRepo = new LocalStorageRepository<Tags>(Tags.table);
 
-export function saveTag(tag: Tag) {
+export function saveTag(tag: Tags) {
     const items = tagRepo.find();
-    const nameExists = items.some(existingTag => existingTag.name === tag.name);
+    const nameExists = items.some(existingTag => existingTag.name.toLowerCase() === tag.name.toLowerCase());
 
     if (nameExists) {
         return { success: false, message: 'Já existe um Tag com esse nome.' };
@@ -14,10 +14,10 @@ export function saveTag(tag: Tag) {
     return tagRepo.save(tag);
 }
 
-export function updateTag(id: string, updateData: Partial<Tag>) {
+export function updateTag(id: string, updateData: Partial<Tags>) {
     const items = tagRepo.find();
-    if (updateData.name && items.some(existingTag => existingTag.name === updateData.name && existingTag.id !== id)) {
-        return { success: false, message: 'Já existe um Tag com esse nome.' };
+    if (updateData.name && items.some(existingTag => existingTag.name.toLowerCase() === updateData.name?.toLowerCase() && existingTag.id !== id)) {
+        return { success: false, message: 'Já existe uma Tag com esse nome.' };
     }
 
     return tagRepo.update(id, updateData);

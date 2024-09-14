@@ -1,13 +1,14 @@
 <template>
-  <div class="navbar">
-    <Menubar :model="items">
+  <div class="w-screen flex items-center justify-center mb-10" >
+    <Menubar :model="items" class="w-[98%] rounded-lg shadow-md overflow-hidden">
       <template #end>
-        <ToggleButton v-model="darkMode" class="light-mode" onLabel="Dark" offLabel="Light" @click="toggleDarkMode" />
+        <ToggleButton v-model="darkMode" class="ml-4" onLabel="Dark" offLabel="Light" @click="toggleDarkMode" />
       </template>
     </Menubar>
-    <input type="file" accept=".json" ref="fileInput" style="display: none" @change="handleFileSelect" />
   </div>
+  <input type="file" accept=".json" ref="fileInput" class="hidden" @change="handleFileSelect" />
 </template>
+
 
 <script setup lang="ts">
 import { ref, onMounted, watch } from 'vue';
@@ -35,17 +36,10 @@ const handleFileSelect = async (event: Event) => {
 };
 
 const toggleDarkMode = () => {
-  if (darkMode.value) {
-    document.documentElement.classList.add('dark');
-  } else {
-    document.documentElement.classList.remove('dark');
-  }
+  document.documentElement.classList.toggle('dark', darkMode.value);
 };
 
 const items = ref([
-  {
-    label: 'Cadastrar tags',
-  },
   {
     label: 'Cadastrar recomendações',
   },
@@ -78,36 +72,12 @@ watch(darkMode, (newValue) => {
 });
 </script>
 
+
 <style scoped>
-@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap');
 
-#modal-header {
-  font-family: "Roboto", sans-serif;
-  font-weight: 900;
-  font-style: normal;
-  font-size: large;
-}
-
-#modal-buttons {
-  margin-top: 15px;
-}
-
-.navbar {
-  font-family: "Roboto", sans-serif;
+.font-roboto {
+  font-family: 'Roboto', sans-serif;
   font-weight: 500;
-  font-style: normal;
-}
-
-.light-mode {
-  font-family: "Roboto", sans-serif;
-  font-weight: 500;
-  font-style: normal;
-  margin-right: 1rem;
-}
-
-.menubar-end {
-  margin-left: auto;
-  display: flex;
-  align-items: center;
 }
 </style>
