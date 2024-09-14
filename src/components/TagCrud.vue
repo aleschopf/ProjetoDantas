@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, inject, onMounted, reactive } from 'vue';
+import { ref, onMounted, onUnmounted, reactive } from 'vue';
 import { LocalStorageRepository } from '../repositories/local-storage.repository';
 import { Tags } from '../entities/tag.entity';
 import { updateTag, saveTag } from '../repositories/tag.repository';
@@ -20,7 +20,7 @@ import Toast from 'primevue/toast';
 import ConfirmDialog from 'primevue/confirmdialog';
 import Dialog from 'primevue/dialog';
 
-const darkMode = inject('darkMode', false);
+const darkMode = ref(document.documentElement.classList.contains('dark'));
 const tagRepo = new LocalStorageRepository<Tags>('tags');
 const tags = ref<Tags[]>([]);
 const selectedTags = ref<Tags[]>([]);
@@ -188,9 +188,30 @@ const cancelEditTag = () => {
   selectedTagColor.value = null;
 };
 
+const updateDarkMode = () => {
+  darkMode.value = document.documentElement.classList.contains('dark');
+};
+
+let observer: MutationObserver;
+
 onMounted(() => {
   initFilters();
   tags.value = tagRepo.find();
+
+  observer = new MutationObserver(() => {
+    updateDarkMode();
+  });
+
+  observer.observe(document.documentElement, {
+    attributes: true,
+    attributeFilter: ['class']
+  });
+});
+
+onUnmounted(() => {
+  if (observer) {
+    observer.disconnect();
+  }
 });
 </script>
 
@@ -260,7 +281,7 @@ onMounted(() => {
     </div>
   </Drawer>
 
-  <div class="table-view" :class="['table-view', darkMode ? 'table-view-dark' : 'table-view-light']">
+  <div :class="['table-view', darkMode ? 'table-view-dark' : 'table-view-light']">
     <Toolbar class="mb-6">
       <template #start>
         <h4 class="mr-full">Gerenciar tags</h4>

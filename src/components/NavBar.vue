@@ -38,6 +38,7 @@ const handleFileSelect = async (event: Event) => {
 
 const toggleDarkMode = () => {
   document.documentElement.classList.toggle('dark', darkMode.value);
+  provide('darkMode', darkMode);
 };
 
 const items = ref([
