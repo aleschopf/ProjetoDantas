@@ -1,5 +1,5 @@
 <template>
-  <div class="w-screen flex items-center justify-center mb-10" >
+  <div class="w-full flex items-center justify-center mb-10" >
     <Menubar :model="items" class="w-[98%] rounded-lg shadow-md overflow-hidden">
       <template #end>
         <ToggleButton v-model="darkMode" class="ml-4" onLabel="Dark" offLabel="Light" @click="toggleDarkMode" />
