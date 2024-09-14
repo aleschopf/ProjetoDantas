@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import NavBarHome from '@/components/NavBarHome.vue';
+import NavBar from '@/components/NavBar.vue';
 import TagCrud from '@/components/TagCrud.vue';
 </script>
 
 <template>
-<NavBarHome />
+<NavBar />
 <TagCrud />
 </template>
