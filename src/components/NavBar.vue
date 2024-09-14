@@ -1,16 +1,3 @@
-<template>
-  <div class="w-full flex items-center justify-center mb-10">
-    <Menubar :model="items" class="w-[98%] rounded-lg shadow-md overflow-hidden">
-      <template #end>
-        <ToggleButton v-model="darkMode" class="ml-4" onLabel="Dark" offLabel="Light" @click="toggleDarkMode" />
-      </template>
-    </Menubar>
-  </div>
-  <input type="file" accept=".json" ref="fileInput" class="hidden" @change="handleFileSelect" />
-  <ConfirmDialog />
-</template>
-
-
 <script setup lang="ts">
 import { ref, onMounted, provide, watch } from 'vue';
 import Menubar from 'primevue/menubar';
@@ -44,9 +31,6 @@ const toggleDarkMode = () => {
 
 const items = ref([
   {
-    label: 'Cadastrar recomendações',
-  },
-  {
     label: 'Cadastrar exercícios',
   },
   {
@@ -75,12 +59,19 @@ watch(darkMode, (newValue) => {
 });
 </script>
 
+<template>
+  <div class="w-full flex items-center justify-center mb-10">
+    <Menubar :model="items" class="w-[98%] rounded-lg shadow-md overflow-hidden">
+      <template #end>
+        <ToggleButton v-model="darkMode" class="ml-4" onLabel="Dark" offLabel="Light" @click="toggleDarkMode" />
+      </template>
+    </Menubar>
+  </div>
+  <input type="file" accept=".json" ref="fileInput" class="hidden" @change="handleFileSelect" />
+  <ConfirmDialog />
+</template>
+
+
 
 <style scoped>
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap');
-
-.font-roboto {
-  font-family: 'Roboto', sans-serif;
-  font-weight: 500;
-}
 </style>

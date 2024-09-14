@@ -5,7 +5,7 @@ import ConfirmationService from 'primevue/confirmationservice'
 import ToastService from 'primevue/toastservice'
 import router from './router'
 import Lara from '@primevue/themes/lara';
-import './assets/styles/tailwind.css';
+import './assets/tailwind.css';
 import 'primeicons/primeicons.css';
 
 const app = createApp(App);
