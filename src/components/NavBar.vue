@@ -3,8 +3,11 @@ import { ref, onMounted, provide, watch } from 'vue';
 import Menubar from 'primevue/menubar';
 import ConfirmDialog from 'primevue/confirmdialog';
 import ToggleButton from 'primevue/togglebutton';
+import { useRouter } from 'vue-router';
 import { exportDatabase } from '../services/database-export.service';
 import { importDatabase } from '../services/database-import.service';
+
+const router = useRouter();
 
 const darkMode = ref(false);
 provide('darkMode', darkMode);
@@ -31,7 +34,16 @@ const toggleDarkMode = () => {
 
 const items = ref([
   {
+    label: 'Cadastrar tags e públicos alvos',
+    command: () => router.push('/'),
+  },
+  {
     label: 'Cadastrar exercícios',
+    command: () => router.push('/exercicios/cadastro'),
+  },
+  {
+    label: 'Criar programa de exerícicios',
+    command: () => router.push('/exercicios'),
   },
   {
     label: 'Exportar JSON',

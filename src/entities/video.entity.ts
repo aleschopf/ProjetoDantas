@@ -4,7 +4,7 @@ import { TargetAudience } from './target-audience.entity';
 export class Video implements IVideo {
     public id: string;
     constructor(
-        public link: string,
+        public youtube_id: string,
         public level: "facil" | "medio" | "dificil",
         public targetAudiences: TargetAudience[]
     ) {

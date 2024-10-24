@@ -1,4 +1,4 @@
-import type { ITag } from '../interfaces/tag.interface'; // Importando a interface
+import type { ITag } from '../interfaces/tag.interface';
 
 export class Tags implements ITag {
     public id: string;
